@@ -1,22 +1,38 @@
-import React from "react"
-import { SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native"
-import { Provider } from "react-redux"
+import React, { useEffect } from "react"
+import { StyleSheet, Text, View } from "react-native"
+import { Provider, useDispatch, useSelector } from "react-redux"
 import { store } from "./app/store"
-import Icon from "react-native-vector-icons/MaterialIcons"
 import { Form } from "./components/Form"
 import { TodoList } from "./components/TodoList"
+import { getTodo, reset } from "./features/todos/todoSlice"
 
-export default function App() {
+function App() {
+	const dispatch = useDispatch()
+
+	const { todoList, isLoading, isError, message } = useSelector(
+		(state) => state.todos
+	)
+
+	useEffect(() => {
+		dispatch(getTodo())
+		if (isError) {
+			console.log(message)
+		}
+		return () => {
+			dispatch(reset())
+		}
+	}, [isError, message, dispatch])
+
 	return (
 		<Provider store={store}>
-			<SafeAreaView style={styles.wrapper}>
+			<View style={styles.wrapper}>
 				<View style={styles.header}>
 					<Text style={styles.textHeader}>Todo App</Text>
 					{/* <Icon name="delete" size={25} color="red"/> */}
 				</View>
 				<Form />
-				<TodoList />
-			</SafeAreaView>
+				<TodoList todoList={todoList} />
+			</View>
 		</Provider>
 	)
 }
@@ -24,19 +40,20 @@ export default function App() {
 const styles = StyleSheet.create({
 	wrapper: {
 		flex: 2,
-		margin: 10,
-		backgroundColor: "#fff"
+		margin: 5,
+		backgroundColor: "#fff",
 	},
 	header: {
 		padding: 20,
-		flexDirection: "row", 
+		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "center"
+		justifyContent: "center",
 	},
 	textHeader: {
 		fontWeight: "bold",
 		fontSize: 20,
-		color: "#cdaaaf"
+		color: "#cdaaaf",
 	},
-	
 })
+
+export default App
