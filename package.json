@@ -1,12 +1,12 @@
 {
-  "name": "todo list",
+  "name": "todolist",
   "version": "1.0.0",
-  "description": "Todo list",
+  "description": "Todolist",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
-    "client": "npm start --prefix frontend",
+    "client": "npm start --prefix todolist",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
     "eslint": "npx eslint --fix **/*.jsx"
@@ -22,7 +22,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.9",
     "node-fetch": "^2.6.7",
-    "react-loading": "^2.0.3"
+    "react-loading": "^2.0.3",
+    "react-native-vector-icons": "^9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
