@@ -1,28 +1,11 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { StyleSheet, Text, View } from "react-native"
-import { Provider, useDispatch, useSelector } from "react-redux"
-import { store } from "./app/store"
+import { Provider } from "react-redux"
 import { Form } from "./components/Form"
 import { TodoList } from "./components/TodoList"
-import { getTodo, reset } from "./features/todos/todoSlice"
+import { store } from "./app/store"
 
-function App() {
-	const dispatch = useDispatch()
-
-	const { todoList, isLoading, isError, message } = useSelector(
-		(state) => state.todos
-	)
-
-	useEffect(() => {
-		dispatch(getTodo())
-		if (isError) {
-			console.log(message)
-		}
-		return () => {
-			dispatch(reset())
-		}
-	}, [isError, message, dispatch])
-
+export function App() {
 	return (
 		<Provider store={store}>
 			<View style={styles.wrapper}>
@@ -31,7 +14,7 @@ function App() {
 					{/* <Icon name="delete" size={25} color="red"/> */}
 				</View>
 				<Form />
-				<TodoList todoList={todoList} />
+				<TodoList />
 			</View>
 		</Provider>
 	)

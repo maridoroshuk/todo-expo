@@ -9,6 +9,7 @@ import {
 	StatusBar,
 } from "react-native"
 import { TodoItem } from "./TodoItem"
+import { getTodo, reset } from "../features/todos/todoSlice"
 
 // const DATA = [
 // 	{ _id: 1, text: "learn expo", complete: false },
@@ -16,7 +17,23 @@ import { TodoItem } from "./TodoItem"
 // 	{ _id: 3, text: "learn expo", complete: false },
 // ]
 
-export function TodoList({ todoList }) {
+export function TodoList() {
+	const dispatch = useDispatch()
+
+	const { todoList, isLoading, isError, message } = useSelector(
+		(state) => state.todos
+	)
+
+	useEffect(() => {
+		dispatch(getTodo())
+		if (isError) {
+			console.log(message)
+		}
+		return () => {
+			dispatch(reset())
+		}
+	}, [isError, message, dispatch])
+
 	return (
 		<View style={styles.wrapper}>
 			{todoList.length > 0 ? (
