@@ -11,11 +11,11 @@ import {
 import { TodoItem } from "./TodoItem"
 import { getTodo, reset } from "../features/todos/todoSlice"
 
-// const DATA = [
-// 	{ _id: 1, text: "learn expo", complete: false },
-// 	{ _id: 2, text: "learn expo", complete: true },
-// 	{ _id: 3, text: "learn expo", complete: false },
-// ]
+const DATA = [
+		{ _id: 1, text: "learn expo", complete: false },
+		{ _id: 2, text: "learn expo", complete: true },
+		{ _id: 3, text: "learn expo", complete: false },
+	]
 
 export function TodoList() {
 	const dispatch = useDispatch()
@@ -23,6 +23,8 @@ export function TodoList() {
 	const { todoList, isLoading, isError, message } = useSelector(
 		(state) => state.todos
 	)
+
+	console.log(todoList)
 
 	useEffect(() => {
 		dispatch(getTodo())
@@ -32,14 +34,14 @@ export function TodoList() {
 		return () => {
 			dispatch(reset())
 		}
-	}, [isError, message, dispatch])
+	}, [dispatch])
 
 	return (
 		<View style={styles.wrapper}>
 			{todoList.length > 0 ? (
 				<SafeAreaView style={styles.container}>
 					<FlatList
-						data={DATA}
+						data={todoList}
 						renderItem={({ item }) => <TodoItem todo={item} />}
 						keyExtractor={(item) => item._id}
 					/>

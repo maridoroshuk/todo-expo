@@ -5,6 +5,7 @@ import {
 	TextInput,
 	Button,
 	TouchableOpacity,
+	Alert,
 } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { useDispatch } from "react-redux"
@@ -15,21 +16,29 @@ export function Form() {
 
 	const dispatch = useDispatch()
 
-	const submitHandler = (e) => {
+	const addTodo = (e) => {
+		if (text === "") {
+			Alert.alert("Error", "Please input todo")
+		} else {
 		e.preventDefault()
 
 		dispatch(createTodo({ text, completed: false }))
 		setText("")
+		}
 	}
 
 	return (
 		<View style={styles.newTodo}>
 			<View style={styles.newTodoInput}>
-				<TextInput placeholder="What needs to be done?" />
+				<TextInput
+					placeholder="What needs to be done?"
+					onChange={(text) => setText(text)}
+					value={text}
+				/>
 			</View>
-			<TouchableOpacity>
+			<TouchableOpacity onPress={addTodo}>
 				<View style={styles.buttonContainer}>
-					<Icon name="add" color="#fff" size={20}/>
+					<Icon name="add" color="#fff" size={20} />
 				</View>
 			</TouchableOpacity>
 		</View>
@@ -58,9 +67,9 @@ const styles = StyleSheet.create({
 		height: 50,
 		width: 50,
 		backgroundColor: "#cdaaaf",
-		borderRadius: 25, 
+		borderRadius: 25,
 		elevation: 40,
 		justifyContent: "center",
-		alignItems: "center"
+		alignItems: "center",
 	},
 })

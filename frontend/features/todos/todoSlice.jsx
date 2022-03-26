@@ -192,6 +192,4 @@ export const todoSlice = createSlice({
   }
 })
 
-
-export default todoSlice.reducer
 export const { reset } = todoSlice.actions

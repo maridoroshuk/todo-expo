@@ -1,30 +1,42 @@
 import React, { useState } from "react"
-import { View, Button, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { View, StyleSheet, TouchableOpacity } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
+import { useDispatch } from "react-redux"
+import { deleteTodo, toggleTodo } from "../features/todos/todoSlice"
+import { TodoItemText } from "./TodoItemText"
 
 export function TodoItem({ todo }) {
-	console.log(todo.text)
+	const [inputVisible, setInputVisible] = useState(false)
+
+	const dispatch = useDispatch()
+
+	const completeHandler = () => {
+		dispatch(toggleTodo({ id: todo._id, complete: !todo.complete }))
+	}
+
+	const deleteHandler = () => {
+		dispatch(deleteTodo(todo._id))
+	}
+
 	return (
 		<View style={styles.todoItem}>
-			<View style={{ flex: 1 }}>
-				<Text
-					style={{
-						marginVertical: 8,
-						flexDirection: "row",
-						borderRadius: 7,
-						textDecorationLine: todo?.complete ? "line-through" : "none",
-					}}
-				>
-					{todo?.text}
-				</Text>
-			</View>
+			<TodoItemText
+				onCompleteClick={completeHandler}
+				inputVisible={inputVisible}
+				todo={todo}
+				setInputVisible={setInputVisible}
+			/>
 			{!todo?.complete && (
-				<TouchableOpacity style={[styles.actionIcon]}>
-					<Icon name="done" size={20} color="#fff" />
+				<TouchableOpacity
+					style={[styles.actionIcon]}
+					onPress={() => setInputVisible(true)}
+				>
+					<Icon name="edit" size={20} color="#fff" />
 				</TouchableOpacity>
 			)}
 			<TouchableOpacity
-				style={[styles.actionIcon, { backgroundColor: "#f9c2ff" }]}
+				style={[styles.actionIcon, { backgroundColor: "#cdaaaf" }]}
+				onPress={deleteHandler}
 			>
 				<Icon name="delete" size={20} color="#fff" />
 			</TouchableOpacity>
@@ -37,6 +49,14 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		color: "#eee",
 	},
+	todoItem: {
+		padding: 20,
+		backgroundColor: "#cdaaaf",
+		flexDirection: "row",
+		elevation: 12,
+		borderRadius: 7,
+		marginVertical: 5,
+	},
 	actionIcon: {
 		height: 25,
 		width: 25,
@@ -45,13 +65,5 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		marginLeft: 5,
 		borderRadius: 5,
-	},
-	todoItem: {
-		padding: 20,
-		backgroundColor: "#cdaaaf",
-		flexDirection: "row",
-		elevation: 12,
-		borderRadius: 7,
-		marginVertical: 5,
 	},
 })
