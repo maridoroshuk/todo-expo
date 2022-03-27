@@ -16,12 +16,10 @@ export function Form() {
 
 	const dispatch = useDispatch()
 
-	const addTodo = (e) => {
+	const addTodo = () => {
 		if (text === "") {
 			Alert.alert("Error", "Please input todo")
 		} else {
-		e.preventDefault()
-
 		dispatch(createTodo({ text, completed: false }))
 		setText("")
 		}
@@ -32,8 +30,9 @@ export function Form() {
 			<View style={styles.newTodoInput}>
 				<TextInput
 					placeholder="What needs to be done?"
-					onChange={(text) => setText(text)}
+					onChangeText={(text) => setText(text)}
 					value={text}
+					onSubmitEditing={addTodo}
 				/>
 			</View>
 			<TouchableOpacity onPress={addTodo}>

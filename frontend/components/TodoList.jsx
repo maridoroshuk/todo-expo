@@ -24,8 +24,6 @@ export function TodoList() {
 		(state) => state.todos
 	)
 
-	console.log(todoList)
-
 	useEffect(() => {
 		dispatch(getTodo())
 		if (isError) {
@@ -34,7 +32,7 @@ export function TodoList() {
 		return () => {
 			dispatch(reset())
 		}
-	}, [dispatch])
+	}, [isError, message, dispatch])
 
 	return (
 		<View style={styles.wrapper}>

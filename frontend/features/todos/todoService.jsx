@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const API_URL = "/api/todo/"
+const API_URL = "http://192.168.0.6:3000/api/todo/"
 
 // Create new todo
 const createTodo = async (data) => {

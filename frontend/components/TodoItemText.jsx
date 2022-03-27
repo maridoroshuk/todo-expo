@@ -20,30 +20,32 @@ export function TodoItemText({
 	const [textInput, setTextInput] = useState(todo.text)
 	const dispatch = useDispatch()
 
-	const submitEditTextHandler = (e) => {
-		e.preventDefault()
+	const submitEditTextHandler = () => {
 		dispatch(editTodo({ id: todo._id, text: textInput }))
 		setInputVisible(false)
 	}
 
-	console.log(inputVisible)
 	return (
 		<View style={{ flex: 1 }}>
 			{inputVisible ? (
 				<View>
-					<TextInput onChangeText={setTextInput} value={textInput} />
-					<TouchableOpacity style={[styles.actionIcon]} onPress={submitEditTextHandler}>
-						<Icon name="done" size={20} color="#fff" />
-					</TouchableOpacity>
+					<TextInput
+						onChangeText={setTextInput}
+						autoFocus={true}
+						value={textInput}
+						onSubmitEditing={submitEditTextHandler}
+					/>
 				</View>
 			) : (
 				<View style={styles.todoText}>
-					<TouchableOpacity style={{ flex: 1 }} onPress={onCompleteClick}>
+					<TouchableOpacity style={styles.todoText} onPress={onCompleteClick}>
 						<Icon name="done" size={20} color="#fff" />
 						<Text
 							style={{
+								marginLeft: 15,
 								borderRadius: 7,
 								textDecorationLine: todo?.complete ? "line-through" : "none",
+								opacity: todo?.complete ? 0.3 : 1
 							}}
 						>
 							{todo?.text}
@@ -57,6 +59,7 @@ export function TodoItemText({
 
 const styles = StyleSheet.create({
 	todoText: {
+		textAlign: "center",
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
