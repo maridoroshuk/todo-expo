@@ -22,21 +22,21 @@ export function App() {
 
 const styles = StyleSheet.create({
 	wrapper: {
-		flex: 2,
-		margin: 5,
-		backgroundColor: "#fff",
+		flex: 1,
+		margin: 20,
+		backgroundColor: "#fff"
 	},
 	header: {
-		padding: 20,
+		padding: 30,
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: "center"
 	},
 	textHeader: {
 		fontWeight: "bold",
 		fontSize: 20,
-		color: "#cdaaaf",
-	},
+		color: "#cdaaaf"
+	}
 })
 
 export default App

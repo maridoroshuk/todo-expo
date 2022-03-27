@@ -6,16 +6,16 @@ import {
 	Text,
 	SafeAreaView,
 	FlatList,
-	StatusBar,
+	StatusBar
 } from "react-native"
 import { TodoItem } from "./TodoItem"
 import { getTodo, reset } from "../features/todos/todoSlice"
 
 const DATA = [
-		{ _id: 1, text: "learn expo", complete: false },
-		{ _id: 2, text: "learn expo", complete: true },
-		{ _id: 3, text: "learn expo", complete: false },
-	]
+	{ _id: 1, text: "learn expo", complete: false },
+	{ _id: 2, text: "learn expo", complete: true },
+	{ _id: 3, text: "learn expo", complete: false }
+]
 
 export function TodoList() {
 	const dispatch = useDispatch()
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
 	wrapper: {
 		flex: 1,
 		width: "100%",
-		marginTop: StatusBar.currentHeight || 0,
-	},
+		marginTop: StatusBar.currentHeight || 0
+	}
 })

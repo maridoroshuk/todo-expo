@@ -47,7 +47,7 @@ export function TodoItem({ todo }) {
 const styles = StyleSheet.create({
 	itemText: {
 		fontSize: 15,
-		color: "#eee",
+		color: "#eee"
 	},
 	todoItem: {
 		padding: 20,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		elevation: 12,
 		borderRadius: 7,
-		marginVertical: 5,
+		marginVertical: 5
 	},
 	actionIcon: {
 		height: 25,
@@ -64,6 +64,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		marginLeft: 5,
-		borderRadius: 5,
-	},
+		borderRadius: 5
+	}
 })

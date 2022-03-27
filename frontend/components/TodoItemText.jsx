@@ -5,7 +5,7 @@ import {
 	Text,
 	StyleSheet,
 	TouchableOpacity,
-	TextInput,
+	TextInput
 } from "react-native"
 import Icon from "react-native-vector-icons/MaterialIcons"
 import { useDispatch } from "react-redux"
@@ -15,7 +15,7 @@ export function TodoItemText({
 	inputVisible,
 	todo,
 	setInputVisible,
-	onCompleteClick,
+	onCompleteClick
 }) {
 	const [textInput, setTextInput] = useState(todo.text)
 	const dispatch = useDispatch()
@@ -31,7 +31,7 @@ export function TodoItemText({
 				<View>
 					<TextInput
 						onChangeText={setTextInput}
-						autoFocus={true}
+						autoFocus
 						value={textInput}
 						onSubmitEditing={submitEditTextHandler}
 					/>
@@ -62,6 +62,6 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "space-between",
-	},
+		justifyContent: "space-between"
+	}
 })
